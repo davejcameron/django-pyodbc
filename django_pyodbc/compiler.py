@@ -311,7 +311,7 @@ class SQLCompiler(compiler.SQLCompiler):
                     right_sql_quote=self.connection.ops.right_sql_quote,
                 )
         else:
-            sql = "SELECT {row_num_col}, {outer} FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY {order}) as {row_num_col}, {inner}) as QQQ where {where}".format(
+            sql = "SELECT {outer} FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY {order}) as {row_num_col}, {inner}) as QQQ where {where}".format(
                 outer=outer_fields,
                 order=order,
                 inner=inner_select,
