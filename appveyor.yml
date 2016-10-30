@@ -11,29 +11,59 @@ environment:
 
   matrix:
 
-    - JOB: "2.7 32-bit"
+    - JOB: "2.7 32-bit Django 1.5"
       TOXENV: "py27"
       PYTHON: "C:\\Python27.11"
       PYTHON_VERSION: "2.7.11"
       PYTHON_ARCH: "32"
+      DJANGO_VERSION: "1.5.12"
 
-    - JOB: "2.7 64-bit"
+    - JOB: "2.7 32-bit Django 1.6"
       TOXENV: "py27"
-      PYTHON: "C:\\Python27.11-x64"
+      PYTHON: "C:\\Python27.11"
       PYTHON_VERSION: "2.7.11"
-      PYTHON_ARCH: "64"
-
-    - JOB: "3.4 32-bit"
-      TOXENV: "py34"
-      PYTHON: "C:\\Python34"
-      PYTHON_VERSION: "3.4"
       PYTHON_ARCH: "32"
+      DJANGO_VERSION: "1.6.11"
 
-    - JOB: "3.4 64-bit"
-      TOXENV: "py34"
-      PYTHON: "C:\\Python34-x64"
-      PYTHON_VERSION: "3.4"
-      PYTHON_ARCH: "64"
+    - JOB: "2.7 32-bit Django 1.7"
+      TOXENV: "py27"
+      PYTHON: "C:\\Python27.11"
+      PYTHON_VERSION: "2.7.11"
+      PYTHON_ARCH: "32"
+      DJANGO_VERSION: "1.7.11"
+
+    - JOB: "2.7 32-bit Django 1.8"
+      TOXENV: "py27"
+      PYTHON: "C:\\Python27.11"
+      PYTHON_VERSION: "2.7.11"
+      PYTHON_ARCH: "32"
+      DJANGO_VERSION: "1.8.15"
+
+    - JOB: "2.7 32-bit Django 1.9"
+      TOXENV: "py27"
+      PYTHON: "C:\\Python27.11"
+      PYTHON_VERSION: "2.7.11"
+      PYTHON_ARCH: "32"
+      DJANGO_VERSION: "1.9.10"
+
+#    - JOB: "2.7 64-bit"
+#      TOXENV: "py27"
+#      PYTHON: "C:\\Python27.11-x64"
+#      PYTHON_VERSION: "2.7.11"
+#      PYTHON_ARCH: "64"
+#      DJANGO_VERSION: "1.5.11"
+#
+#    - JOB: "3.4 32-bit"
+#      TOXENV: "py34"
+#      PYTHON: "C:\\Python34"
+#      PYTHON_VERSION: "3.4"
+#      PYTHON_ARCH: "32"
+#
+#    - JOB: "3.4 64-bit"
+#      TOXENV: "py34"
+#      PYTHON: "C:\\Python34-x64"
+#      PYTHON_VERSION: "3.4"
+#      PYTHON_ARCH: "64"
 
 init:
   - "ECHO %TOXENV%"
@@ -62,6 +92,7 @@ install:
   - "pip install --disable-pip-version-check --user --upgrade virtualenv"
 
   # Install requirements.
+  - "%CMD_IN_ENV% pip install -q Django==DJANGO_VERSION"
   - "%CMD_IN_ENV% pip install -r requirements.txt -r requirements-wheel.txt"
 
   # Make a python3.4.bat file in the current directory so that tox will find it
