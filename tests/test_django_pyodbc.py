@@ -47,7 +47,7 @@ DATABASES = {
        'HOST': "127.0.0.1\SSQL2008R2SP2,1433",
        'USER': "sa",
        'PASSWORD': "Password12!",
-       'NAME': "master",
+       'NAME': "defaultdb",
        'OPTIONS': {
            'host_is_server': True,
            'autocommit': True,
@@ -59,7 +59,7 @@ DATABASES = {
        'HOST': "127.0.0.1\SQL2008R2SP2,1433",
        'USER': "sa",
        'PASSWORD': "Password12!",
-       'NAME': "defaultdb",
+       'NAME': "otherdb",
        'OPTIONS': {
            'host_is_server': True,
            'autocommit': True,
