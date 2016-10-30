@@ -35,18 +35,6 @@ environment:
       PYTHON_VERSION: "3.4"
       PYTHON_ARCH: "64"
 
-    - JOB: "3.5 32-bit"
-      TOXENV: "py35"
-      PYTHON: "C:\\Python35"
-      PYTHON_VERSION: "3.5.0"
-      PYTHON_ARCH: "32"
-
-    - JOB: "3.5 64-bit"
-      TOXENV: "py35"
-      PYTHON: "C:\\Python35-x64"
-      PYTHON_VERSION: "3.5.0"
-      PYTHON_ARCH: "64"
-
 init:
   - "ECHO %TOXENV%"
 
