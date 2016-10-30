@@ -56,10 +56,10 @@ DATABASES = {
     },
    'other': {
        'ENGINE': "django_pyodbc",
-       'HOST': "127.0.0.1\SQL2012SP1,1433",
+       'HOST': "127.0.0.1\SQL2008R2SP2,1433",
        'USER': "sa",
        'PASSWORD': "Password12!",
-       'NAME': "master",
+       'NAME': "defaultdb",
        'OPTIONS': {
            'host_is_server': True,
            'autocommit': True,

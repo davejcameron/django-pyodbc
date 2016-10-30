@@ -40,7 +40,6 @@ init:
 
 services:
   - mssql2008r2sp2
-  - mssql2012sp1
 
 install:
   # Install Python (from the official .msi of http://python.org) and pip when
