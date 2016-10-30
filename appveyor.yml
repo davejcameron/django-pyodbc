@@ -90,10 +90,16 @@ install:
 
 build_script:
   # If not a metacov job, then build wheels and .exe installers.
-  - "%CMD_IN_ENV% %PYTHON%\python setup.py install"
+  - if NOT "%COVERAGE_COVERAGE%" == "yes" %CMD_IN_ENV% %PYTHON%\python setup.py install
 
   # Push everything in dist\ as an artifact.
   - ps: if ( Test-Path 'dist' -PathType Container ) { Get-ChildItem dist\*.* | % { Push-AppveyorArtifact $_.FullName -FileName ('dist\' + $_.Name) } }
 
 test_script:
   - "%CMD_IN_ENV% %PYTHON%\\Scripts\\tox"
+
+after_test:
+  - if "%COVERAGE_COVERAGE%" == "yes" 7z a metacov-win-%TOXENV%.zip %APPVEYOR_BUILD_FOLDER%\.metacov*
+
+artifacts:
+  - path: "metacov-*.zip"
