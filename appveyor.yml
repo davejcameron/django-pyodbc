@@ -103,7 +103,7 @@ build_script:
   - sqlcmd -S localhost,1433 -U sa -P Password12! -Q "CREATE DATABASE defaultdb" -d "master"
   - sqlcmd -S localhost,1433 -U sa -P Password12! -Q "CREATE DATABASE otherdb" -d "master"
   # If not a metacov job, then build wheels and .exe installers.
-  - "%CMD_IN_ENV% %PYTHON%\python setup.py install"
+  - %CMD_IN_ENV% %PYTHON%\python setup.py install
 
   # Push everything in dist\ as an artifact.
   - ps: if ( Test-Path 'dist' -PathType Container ) { Get-ChildItem dist\*.* | % { Push-AppveyorArtifact $_.FullName -FileName ('dist\' + $_.Name) } }
