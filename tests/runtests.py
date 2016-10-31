@@ -91,9 +91,15 @@ def get_test_modules():
                 modules.append((modpath, f))
     return modules
 
+
 def get_installed():
-    from django.db.models.loading import get_apps
-    return [app.__name__.rsplit('.', 1)[0] for app in get_apps() if not app.__name__.startswith('django.contrib')]
+    try:
+        from django.db.models.loading import get_apps
+        return [app.__name__.rsplit('.', 1)[0] for app in get_apps() if not app.__name__.startswith('django.contrib')]
+    except ImportError:
+        from django.apps import apps
+        return [app.__name__.rsplit('.', 1)[0] for app in apps if not app.__name__.startswith('django.contrib')]
+
 
 def setup(verbosity, test_labels):
     from django.conf import settings
