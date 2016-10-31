@@ -76,5 +76,5 @@ PASSWORD_HASHERS = (
 )
 
 
-TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
-TEST_OUTPUT_FILE_NAME = 'junit-results.xml'
+#TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
+#TEST_OUTPUT_FILE_NAME = 'junit-results.xml'
