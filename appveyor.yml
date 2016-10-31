@@ -11,40 +11,12 @@ environment:
 
   matrix:
 
-    - JOB: "2.7 32-bit Django 1.4"
+    - JOB: "2.7 32-bit Django 1.10"
       TOXENV: "py27"
       PYTHON: "C:\\Python27.11"
       PYTHON_VERSION: "2.7.11"
       PYTHON_ARCH: "32"
-      DJANGO_VERSION: "1.4.22"
-
-    - JOB: "2.7 32-bit Django 1.5"
-      TOXENV: "py27"
-      PYTHON: "C:\\Python27.11"
-      PYTHON_VERSION: "2.7.11"
-      PYTHON_ARCH: "32"
-      DJANGO_VERSION: "1.5.12"
-
-    - JOB: "2.7 32-bit Django 1.6"
-      TOXENV: "py27"
-      PYTHON: "C:\\Python27.11"
-      PYTHON_VERSION: "2.7.11"
-      PYTHON_ARCH: "32"
-      DJANGO_VERSION: "1.6.11"
-
-    - JOB: "2.7 32-bit Django 1.7"
-      TOXENV: "py27"
-      PYTHON: "C:\\Python27.11"
-      PYTHON_VERSION: "2.7.11"
-      PYTHON_ARCH: "32"
-      DJANGO_VERSION: "1.7.11"
-
-    - JOB: "2.7 32-bit Django 1.8"
-      TOXENV: "py27"
-      PYTHON: "C:\\Python27.11"
-      PYTHON_VERSION: "2.7.11"
-      PYTHON_ARCH: "32"
-      DJANGO_VERSION: "1.8.15"
+      DJANGO_VERSION: "1.10.2"
 
     - JOB: "2.7 32-bit Django 1.9"
       TOXENV: "py27"
@@ -53,12 +25,34 @@ environment:
       PYTHON_ARCH: "32"
       DJANGO_VERSION: "1.9.10"
 
-    - JOB: "2.7 32-bit Django 1.10"
+    - JOB: "2.7 32-bit Django 1.8"
       TOXENV: "py27"
       PYTHON: "C:\\Python27.11"
       PYTHON_VERSION: "2.7.11"
       PYTHON_ARCH: "32"
-      DJANGO_VERSION: "1.10.2"
+      DJANGO_VERSION: "1.8.15"
+
+    - JOB: "2.7 32-bit Django 1.7"
+      TOXENV: "py27"
+      PYTHON: "C:\\Python27.11"
+      PYTHON_VERSION: "2.7.11"
+      PYTHON_ARCH: "32"
+      DJANGO_VERSION: "1.7.11"
+
+    - JOB: "2.7 32-bit Django 1.6"
+      TOXENV: "py27"
+      PYTHON: "C:\\Python27.11"
+      PYTHON_VERSION: "2.7.11"
+      PYTHON_ARCH: "32"
+      DJANGO_VERSION: "1.6.11"
+
+    - JOB: "2.7 32-bit Django 1.5"
+      TOXENV: "py27"
+      PYTHON: "C:\\Python27.11"
+      PYTHON_VERSION: "2.7.11"
+      PYTHON_ARCH: "32"
+      DJANGO_VERSION: "1.5.12"
+
 
 init:
   - "ECHO %TOXENV%"
@@ -98,7 +92,7 @@ build_script:
   - sqlcmd -S localhost,1433 -U sa -P Password12! -Q "CREATE DATABASE defaultdb" -d "master"
   - sqlcmd -S localhost,1433 -U sa -P Password12! -Q "CREATE DATABASE otherdb" -d "master"
   # If not a metacov job, then build wheels and .exe installers.
-  - "%CMD_IN_ENV% %PYTHON%\python setup.py install"
+  - if NOT "%COVERAGE_COVERAGE%" == "yes" %CMD_IN_ENV% %PYTHON%\python setup.py install
 
   # Push everything in dist\ as an artifact.
   - ps: if ( Test-Path 'dist' -PathType Container ) { Get-ChildItem dist\*.* | % { Push-AppveyorArtifact $_.FullName -FileName ('dist\' + $_.Name) } }
